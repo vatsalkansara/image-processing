@@ -136,7 +136,7 @@ include_directories(
 ## Declare a C++ executable
 # add_executable(vatsal_node src/vatsal_node.cpp)
 add_executable(IPM_2cam src/IPM_2cam.cpp)
-
+add_executable(dist_interpolate src/dist_interpolate.cpp)
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(vatsal_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
@@ -146,6 +146,7 @@ add_executable(IPM_2cam src/IPM_2cam.cpp)
 #   ${catkin_LIBRARIES}
 # )
 target_link_libraries(IPM_2cam ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+target_link_libraries(dist_interpolate ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
 #############
 ## Install ##
 #############
