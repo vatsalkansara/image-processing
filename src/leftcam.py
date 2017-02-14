@@ -63,7 +63,7 @@ class image_converter:
                 #cv2.rectangle(im1,(x,y),(x+w,y+h),(0,255,0),2)
             cv2.drawContours(im1,[contours],-1,(0,255,0),2)
             cv2.drawContours(blank,[contours],-1,(255,255,255),-1)
-                '''extLeft = tuple(contours[contours[:, :, 0].argmin()][0])
+            '''extLeft = tuple(contours[contours[:, :, 0].argmin()][0])
                 extRight = tuple(contours[contours[:, :, 0].argmax()][0])
                 [vx,vy,x,y] = cv2.fitLine(contours, cv2.DIST_L2,0,0.01,0.01)
                 lefty = int(((extLeft[0]-x)*vy/vx) + y)
@@ -73,7 +73,7 @@ class image_converter:
                 
     final = cv2.cvtColor(blank, cv2.COLOR_BGR2GRAY)
     #cv2.imshow('im1',im1)
-    cv2.imshow('final',final)
+    cv2.imshow('final-left',final)
     cv2.waitKey(3)
 
     try:
@@ -91,7 +91,7 @@ def main(args):
     cv2.destroyAllWindows()
 
 if __name__ == '__main__':
-npz_calib_file = np.load('/home/sine/catkin_ws/src/lane_detect/src/calibration_data.npz')
+	npz_calib_file = np.load('/home/sine/catkin_ws/src/vatsal/src/leftcam_fisheye_correction.npz')
 print("file opened")
 distCoeff=npz_calib_file['distCoeff']
 intrinsic_matrix = npz_calib_file['intrinsic_matrix']

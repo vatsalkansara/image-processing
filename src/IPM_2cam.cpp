@@ -39,8 +39,8 @@ void leftimage(const sensor_msgs::ImageConstPtr& original_image)
 
 	cv::Mat src = cv_ptr->image;
 
-	Point2f p[4] = {Point(0, 0), Point(639,0), Point(639, 479), Point(0, 479)};
-	Point2f q[4] = {Point(229, 389), Point(20, 220), Point(183, 193), Point(236, 378)};
+	Point2f p[4] = {Point(0, 0), Point(639,0), Point(639, 439), Point(0, 439)};
+	Point2f q[4] = {Point(129, 382), Point(248, 290), Point(260, 378), Point(225, 407)};
 
 	Mat transform (3, 3, CV_32FC1);
 	transform = getPerspectiveTransform(p, q);
@@ -85,8 +85,8 @@ void rightimage(const sensor_msgs::ImageConstPtr& original_image)
 
 	cv::Mat src = cv_ptr->image;
 
-	Point2f p[4] = {Point(0, 0), Point(639,0), Point(639, 479), Point(0, 479)};
-	Point2f q[4] = {Point(445, 287), Point(273, 392), Point(258, 380), Point(337, 201)};
+	Point2f p[4] = {Point(0, 0), Point(639,0), Point(639, 439), Point(0, 439)};
+	Point2f q[4] = {Point(237, 275), Point(384, 383), Point(275, 410), Point(237, 379)};
 
 	Mat transform (3, 3, CV_32FC1);
 	transform = getPerspectiveTransform(p, q);

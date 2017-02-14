@@ -18,7 +18,7 @@
 	const int image_height = 480;
 
 	const int occ_grid_width = 500;
-	const int occ_grid_height = 400;
+	const int occ_grid_height = 500;
 
 	const int occ_grid_widthr = 200;
 	const int occ_grid_heightr = 400;	

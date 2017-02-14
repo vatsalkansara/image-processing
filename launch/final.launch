@@ -16,8 +16,8 @@
     <param name="camera_frame_id" value="usb_cam" />
     <param name="io_method" value="mmap"/>
   </node>
-  <node pkg="lane_detect" type="leftcam.py" name="leftcam" output="screen"></node>
-  <node pkg="lane_detect" type="rightcam.py" name="rightcam" output="screen"></node>
-  <node pkg="lane_detect" type="IPM" name="IPM" output="screen"></node>
-  <node pkg="lane_detect" type="dist_interpolater" name="dist_interpolator" output="screen"></node>
+  <node pkg="vatsal" type="leftcam.py" name="leftcam" output="screen"></node>
+  <node pkg="vatsal" type="rightcam.py" name="rightcam" output="screen"></node>
+  <node pkg="vatsal" type="IPM_2cam" name="IPM" output="screen"></node>
+  <node pkg="vatsal" type="dist_interpolate" name="dist_interpolator" output="screen"></node>
 </launch>
