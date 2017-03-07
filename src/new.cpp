@@ -25,14 +25,10 @@ int angle = 20;
 double begin,end;
 Mat src, src_gray;
 Mat src_rgb;
-Mat src_left, src_right;
 Mat roi, final_grid;
-
+//Mat LeftROI;
 void leftimage(const sensor_msgs::ImageConstPtr& original_image)
 {
-	Mat temp = Mat::zeros(Size(image_height, image_width), CV_8UC1);
-	src_left = Mat::zeros(Size(occ_grid_width, occ_grid_height), CV_8UC1);
-    
     cv_bridge::CvImagePtr cv_ptr;
     try
     {
@@ -54,30 +50,25 @@ void leftimage(const sensor_msgs::ImageConstPtr& original_image)
 
 	warpPerspective(src, roi, transform, Size(occ_grid_width, occ_grid_height));
 
-	Lane_points_left.clear();
+	Lane_points_left.clear();//comment one of these
 
-	Mat LeftROI;
+	Mat LeftROI;//LeftROI = Mat::zeros(Size(occ_grid_width, occ_grid_height), CV_8UC1);
 	roi.copyTo(LeftROI);
 
-	if (!final_grid.data)
+	if (!final_grid.data)//why
 	final_grid = Mat::zeros(Size(occ_grid_width, occ_grid_height), CV_8UC1);
 
 	final_grid = final_grid + LeftROI;
+    //how about
+    //final_grid = final_grid + roi;
 
 	Lane_points_left.clear();
 
 	waitKey(1);
-
-	// final_grid.release();
-
-	src_left.release();
 }
 
 void rightimage(const sensor_msgs::ImageConstPtr& original_image)
 {
-	Mat temp = Mat::zeros(Size(image_height, image_width), CV_8UC1);
-	src_right = Mat::zeros(Size(occ_grid_width, occ_grid_height), CV_8UC1);
-    
     cv_bridge::CvImagePtr cv_ptr;
     try
     {
@@ -99,12 +90,12 @@ void rightimage(const sensor_msgs::ImageConstPtr& original_image)
 
 	warpPerspective(src, roi, transform, Size(occ_grid_width, occ_grid_height));
 
-	Lane_points_right.clear();
+	Lane_points_right.clear();//comment one of these
 
 	Mat RightROI;
 	roi.copyTo(RightROI);
 
-	if (!final_grid.data)
+	if (!final_grid.data)//why
 	final_grid = Mat::zeros(Size(occ_grid_width, occ_grid_height), CV_8UC1);
 
 	final_grid = final_grid + RightROI;
@@ -113,11 +104,6 @@ void rightimage(const sensor_msgs::ImageConstPtr& original_image)
 	Lane_points_right.clear();
 
 	waitKey(1);
-
-	// final_grid.release();
-
-	src_right.release();
-
 }
 
 void extend(std::vector<std::vector<Point> > &Lane_points)
@@ -217,7 +203,7 @@ void interpolate(int, void*)
     std::vector<std::vector<Point> > Lane_points;
     std::vector<Vec4i> hierarchy;
 
-    cvtColor(src, src_gray, CV_BGR2GRAY);
+    cvtColor(src, src_gray, CV_BGR2GRAY);// no need to convert src is already in Gray
     findContours(src_gray, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_NONE);
 
     src_rgb = Mat::zeros(Size(occ_grid_widthr, occ_grid_heightr), CV_8UC3);
@@ -310,7 +296,7 @@ int main(int argc, char **argv)
 		final_grid = Mat::zeros(Size(occ_grid_width, occ_grid_height), CV_8UC1);
 		ros::spinOnce();
 		final_grid = final_grid(Rect(150,0,200,400));
-		cvtColor(final_grid,final_grid,CV_GRAY2BGR);
+		cvtColor(final_grid,final_grid,CV_GRAY2BGR);//no need to convert to BGR.....remove
 		//sensor_msgs::ImagePtr msg = cv_bridge::CvImage(std_msgs::Header(), "bgr8", final_grid).toImageMsg();
 		//pub.publish(msg);
 		interpolate(0,0);
